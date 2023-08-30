@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>My first Renderer</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      background-color: black;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="canv" width="1000px" height="1000px">
+
+  </canvas>
+  <script>
+    let canv = document.querySelector("#canv")
+    let ctx = canv.getContext("2d")
+
+    ctx.fillStyle = "green"
+    ctx.fillRect(0, 0, 500, 500)
+
+    let x = 0
+    let y = 0
+    let strength = 100
+
+    ctx.fillStyle = "white"
+    ctx.strokeStyle = "black"
+    ctx.lineWidth = 10
+
+    for (let i = 0; i < 9; i++) {
+      ctx.save();
+      ctx.translate(100,100)
+      ctx.rotate(.785 * i)
+
+      ctx.beginPath()
+      ctx.moveTo(x, y)
+      ctx.bezierCurveTo(
+        x + strength, y - strength/2,
+        x + strength, y + strength/2,
+        x, y
+      )
+      ctx.fill()
+      ctx.stroke()
+
+      ctx.restore()
+    }
+
+  </script>
+</body>
+
+</html>
